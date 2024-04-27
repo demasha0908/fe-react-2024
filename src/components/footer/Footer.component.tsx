@@ -9,17 +9,17 @@ export const FooterComponent = () => (
         <div className={styles.footer__content}>
             <ul className={styles.footer__links}>
                 <li>
-                    <a className={styles.footer__link} href={'https://uk-ua.facebook.com/'} target="_blank" rel="noreferrer">
+                    <a className={styles.footer__link} href="https://uk-ua.facebook.com/" target="_blank" rel="noreferrer">
                         <img className={styles.linkicon} src={Facebook} alt="Facebook" />
                     </a>
                 </li>
                 <li>
-                    <a className={styles.footer__link} href={'https://www.linkedin.com/'} target="_blank" rel="noreferrer">
+                    <a className={styles.footer__link} href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
                         <img className={styles.linkicon} src={Linkedin} alt="Linkedin" />
                     </a>
                 </li>
                 <li>
-                    <a className={styles.footer__link} href={'https://www.instagram.com/'} target="_blank" rel="noreferrer">
+                    <a className={styles.footer__link} href="https://www.instagram.com/" target="_blank" rel="noreferrer">
                         <img className={styles.linkicon} src={Instagram} alt="Instagram" />
                     </a>
                 </li>
