@@ -6,7 +6,7 @@
 .wrapper {
   display: flex;
   align-items: center;
-  padding: 0 52px;
+  padding: 0 30px;
 }
 
 .logo {
@@ -18,7 +18,6 @@
 .header__themes {
   display: none;
 }
-
 
 .header__navright {
   margin-left: auto;
@@ -46,6 +45,10 @@
     padding: 17px 0;
   }
 
+  .wrapper {
+    padding: 0 63px 0 52px;
+  }
+
   .container {
     width: 1175px;
   }
@@ -55,10 +58,9 @@
     height: 46px;
   }
 
-  .theme {
+  .header__themes {
     display: flex;
     align-items: center;
-    gap: 10px;
     margin-left: 49px;
   }
 
@@ -68,6 +70,10 @@
   }
 
   .header__themebtn:hover {
+    opacity: 1;
+  }
+
+  .header__themebtn .header__themebtnactive {
     opacity: 1;
   }
 

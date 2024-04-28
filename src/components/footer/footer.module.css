@@ -22,8 +22,26 @@
   list-style-type: none;
 }
 
+.footer__link .linkiconhover {
+  display: none;
+}
+
+.footer__link:hover .linkicon {
+  display: none;
+}
+
+.footer__link:hover .linkiconhover {
+  display: block;
+}
+
 .footer__courselink {
   color: #EF4934;
+  line-height: 32px;
+}
+
+.footer__courselink:hover {
+  font-weight: 600;
+  line-height: 25px;
 }
 
 @media (min-width: 1280px) {

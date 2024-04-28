@@ -1,10 +1,11 @@
-import carticon from '@/assets/cart.png';
-import loginicon from '@/assets/Login.png';
-import logo from '@/assets/logo.png';
-import mobileMenu from '@/assets/MobileMenu.png';
-import DarkThemeBtn from '@/assets/moon.png';
-import signicon from '@/assets/Sign.png';
-import LightThemeBtn from '@/assets/Sun.png';
+import carticon from '@/assets/cart.svg';
+import Divider from '@/assets/divider.svg';
+import loginicon from '@/assets/login.svg';
+import logo from '@/assets/logo.svg';
+import mobilemenu from '@/assets/mobilemenu.svg';
+import DarkThemeBtn from '@/assets/moon.svg';
+import signicon from '@/assets/sign.svg';
+import LightThemeBtn from '@/assets/sun.svg';
 
 import styles from './header.module.css';
 
@@ -13,10 +14,10 @@ export const HeaderComponent = () => (
         <div className={styles.wrapper}>
             <img className={styles.logo} src={logo} alt="logo" />
             <div className={styles.header__themes}>
-                <button className={styles.header__themebtn}>
+                <button className={`${styles.header__themeBtn} ${styles.header__themeBtnactive}`}>
                     <img className={styles.header__themeimg} src={LightThemeBtn} alt="LightTheme" />
                 </button>
-
+                <img className={styles.divider} src={Divider} alt="Divider" />
                 <button className={styles.header__themeBtn}>
                     <img className={styles.header__themeimg} src={DarkThemeBtn} alt="DarkTheme" />
                 </button>
@@ -42,7 +43,7 @@ export const HeaderComponent = () => (
                     <img className={styles.header__carticon} src={carticon} alt="cart" />
                 </button>
                 <button className={styles.header__mobilemenu}>
-                    <img className={styles.header__mobilemenu} src={mobileMenu} alt="Mobile Menu" />
+                    <img className={styles.header__mobilemenu} src={mobilemenu} alt="Mobile Menu" />
                 </button>
                 <button className={styles.header__login}>
                     <img className={styles.header__loginicon} src={loginicon} alt="Login" />
