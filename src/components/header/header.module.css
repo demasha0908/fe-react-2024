@@ -1,4 +1,143 @@
 .header {
-  font-size: 34px;
-  text-align: center;
+  padding: 15px 0;
+  background-color: #111;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.header__themes {
+  display: none;
+}
+
+.header__navright {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header__nav {
+  display: none;
+}
+
+.header__login {
+  display: none;
+}
+
+.header__sign {
+  display: none;
+}
+
+
+@media (min-width: 1280px) {
+
+  .header {
+    padding: 17px 0;
+  }
+
+  .wrapper {
+    padding: 0 63px 0 52px;
+  }
+
+  .container {
+    width: 1175px;
+  }
+
+  .logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .header__themes {
+    display: flex;
+    align-items: center;
+    margin-left: 49px;
+  }
+
+  .header__themebtn {
+    opacity: .3;
+    transition: .3s all;
+  }
+
+  .header__themebtn:hover {
+    opacity: 1;
+  }
+
+  .header__themebtn .header__themebtnactive {
+    opacity: 1;
+  }
+
+  .header__nav {
+    margin-left: auto;
+    display: block;
+  }
+
+  .header__navwrapper {
+    display: flex;
+    align-items: center;
+    gap: 49px
+  }
+
+  .header__link {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFF;
+    text-decoration: none;
+  }
+
+  .header__linkactive {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFF;
+    text-decoration: none;
+  }
+
+  .header__navright {
+    margin-left: 124px;
+  }
+
+  .header__mobilemenu {
+    display: none;
+  }
+
+  .header__login {
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    border-radius: 40px;
+    border-color: transparent;
+    background: #333;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFF;
+  }
+
+  .header__sign {
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 40px;
+    border-color: transparent;
+    background: #EF4934;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFF;
+  }
 }
