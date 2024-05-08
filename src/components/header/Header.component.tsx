@@ -10,10 +10,18 @@ import LightThemeBtn from '@/assets/sun.svg';
 import styles from './header.module.css';
 
 interface HeaderProps {
-    toggleAbout: () => void;
-    toggleProducts: () => void;
+    shouldShowAbout: boolean;
+    toggleAboutState: (isShowAbout: boolean) => void;
 }
-function HeaderComponent({ toggleAbout, toggleProducts }: HeaderProps) {
+function HeaderComponent({ shouldShowAbout, toggleAboutState }: HeaderProps) {
+    const showAbout = () => {
+        toggleAboutState(true);
+    };
+
+    const showProducts = () => {
+        toggleAboutState(false);
+    };
+
     return (
         <>
             <header className={styles.header}>
@@ -32,12 +40,18 @@ function HeaderComponent({ toggleAbout, toggleProducts }: HeaderProps) {
                     <nav className={styles.header__nav}>
                         <ul className={styles.header__navwrapper}>
                             <li>
-                                <button className={styles.header__linkactive} onClick={toggleAbout}>
+                                <button
+                                    className={`${styles.header__link} ${shouldShowAbout ? styles.header__linkactive : ''}`}
+                                    onClick={showAbout}
+                                >
                                     About
                                 </button>
                             </li>
                             <li>
-                                <button className={styles.header__link} onClick={toggleProducts}>
+                                <button
+                                    className={`${styles.header__link} ${shouldShowAbout ? '' : styles.header__linkactive}`}
+                                    onClick={showProducts}
+                                >
                                     Products
                                 </button>
                             </li>

@@ -8,20 +8,17 @@ import ProductList from '@/components/product/ProductList.component';
 import styles from './App.module.css';
 
 function App() {
-    const [isShowAbout, setIsShowAbout] = useState(true);
+    const [shouldShowAbout, setShouldShowAbout] = useState<boolean>(true);
 
-    const toggleAbout = () => {
-        setIsShowAbout(true);
+    const toggleAbout = (isShowAbout: boolean) => {
+        setShouldShowAbout(isShowAbout);
     };
 
-    const toggleProducts = () => {
-        setIsShowAbout(false);
-    };
     return (
         <>
-            <HeaderComponent toggleAbout={toggleAbout} toggleProducts={toggleProducts} />
+            <HeaderComponent shouldShowAbout={shouldShowAbout} toggleAboutState={toggleAbout} />
             <main>
-                <div className={styles.container}>{isShowAbout ? <AboutComponent /> : <ProductList />}</div>
+                <div className={styles.container}>{shouldShowAbout ? <AboutComponent /> : <ProductList />}</div>
             </main>
             <FooterComponent />
         </>
