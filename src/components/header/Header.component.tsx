@@ -9,52 +9,76 @@ import LightThemeBtn from '@/assets/sun.svg';
 
 import styles from './header.module.css';
 
-export const HeaderComponent = () => (
-    <header className={styles.header}>
-        <div className={styles.wrapper}>
-            <img className={styles.logo} src={logo} alt="logo" />
-            <div className={styles.header__themes}>
-                <button className={`${styles.header__themeBtn} ${styles.header__themeBtnactive}`}>
-                    <img className={styles.header__themeimg} src={LightThemeBtn} alt="LightTheme" />
-                </button>
-                <img className={styles.divider} src={Divider} alt="Divider" />
-                <button className={styles.header__themeBtn}>
-                    <img className={styles.header__themeimg} src={DarkThemeBtn} alt="DarkTheme" />
-                </button>
-            </div>
+interface HeaderProps {
+    shouldShowAbout: boolean;
+    toggleAboutState: (isShowAbout: boolean) => void;
+}
+function HeaderComponent({ shouldShowAbout, toggleAboutState }: HeaderProps) {
+    const showAbout = () => {
+        toggleAboutState(true);
+    };
 
-            <nav className={styles.header__nav}>
-                <ul className={styles.header__navwrapper}>
-                    <li>
-                        <a className={styles.header__linkactive} href="/">
-                            About
-                        </a>
-                    </li>
-                    <li>
-                        <a className={styles.header__link} href="/">
-                            Products
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+    const showProducts = () => {
+        toggleAboutState(false);
+    };
 
-            <div className={styles.header__navright}>
-                <button className={styles.header__cart}>
-                    <img className={styles.header__carticon} src={carticon} alt="cart" />
-                </button>
-                <button className={styles.header__mobilemenu}>
-                    <img className={styles.header__mobilemenu} src={mobilemenu} alt="Mobile Menu" />
-                </button>
-                <button className={styles.header__login}>
-                    <img className={styles.header__loginicon} src={loginicon} alt="Login" />
-                    Login
-                </button>
+    return (
+        <>
+            <header className={styles.header}>
+                <div className={styles.wrapper}>
+                    <img className={styles.logo} src={logo} alt="logo" />
+                    <div className={styles.header__themes}>
+                        <button className={`${styles.header__themeBtn} ${styles.header__themeBtnactive}`}>
+                            <img className={styles.header__themeimg} src={LightThemeBtn} alt="LightTheme" />
+                        </button>
+                        <img className={styles.divider} src={Divider} alt="Divider" />
+                        <button className={styles.header__themeBtn}>
+                            <img className={styles.header__themeimg} src={DarkThemeBtn} alt="DarkTheme" />
+                        </button>
+                    </div>
 
-                <button className={styles.header__sign} title="Sign">
-                    <img className={styles.header__signicon} src={signicon} alt="Sign" />
-                    Sign Up
-                </button>
-            </div>
-        </div>
-    </header>
-);
+                    <nav className={styles.header__nav}>
+                        <ul className={styles.header__navwrapper}>
+                            <li>
+                                <button
+                                    className={`${styles.header__link} ${shouldShowAbout ? styles.header__linkactive : ''}`}
+                                    onClick={showAbout}
+                                >
+                                    About
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    className={`${styles.header__link} ${shouldShowAbout ? '' : styles.header__linkactive}`}
+                                    onClick={showProducts}
+                                >
+                                    Products
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div className={styles.header__navright}>
+                        <button className={styles.header__cart}>
+                            <img className={styles.header__carticon} src={carticon} alt="cart" />
+                        </button>
+                        <button className={styles.header__mobilemenu}>
+                            <img className={styles.header__mobilemenu} src={mobilemenu} alt="Mobile Menu" />
+                        </button>
+                        <button className={styles.header__login}>
+                            <img className={styles.header__loginicon} src={loginicon} alt="Login" />
+                            Login
+                        </button>
+
+                        <button className={styles.header__sign} title="Sign">
+                            <img className={styles.header__signicon} src={signicon} alt="Sign" />
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
+            </header>
+        </>
+    );
+}
+
+export default HeaderComponent;

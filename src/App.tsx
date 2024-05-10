@@ -1,14 +1,24 @@
-import { FooterComponent } from '@/components/footer/Footer.component.tsx';
-import { HeaderComponent } from '@/components/header/Header.component.tsx';
+import { useState } from 'react';
 
-import { AboutComponent } from './components/about/About.component.tsx';
+import AboutComponent from '@/components/about/About.component';
+import FooterComponent from '@/components/footer/Footer.component';
+import HeaderComponent from '@/components/header/Header.component';
+import ProductList from '@/components/product/ProductList.component';
+
+import styles from './App.module.css';
 
 function App() {
+    const [shouldShowAbout, setShouldShowAbout] = useState<boolean>(true);
+
+    const toggleAbout = (isShowAbout: boolean) => {
+        setShouldShowAbout(isShowAbout);
+    };
+
     return (
         <>
-            <HeaderComponent />
+            <HeaderComponent shouldShowAbout={shouldShowAbout} toggleAboutState={toggleAbout} />
             <main>
-                <AboutComponent />
+                <div className={styles.container}>{shouldShowAbout ? <AboutComponent /> : <ProductList />}</div>
             </main>
             <FooterComponent />
         </>
