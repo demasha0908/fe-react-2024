@@ -89,9 +89,9 @@
   }
 
   .header__link {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--mainfont);
     font-weight: 500;
-    font-size: 16px;
+    font-size: var(--mainfs);
     color: #FFF;
     text-decoration: none;
     cursor: pointer;
@@ -102,7 +102,7 @@
   }
 
   .header__link:hover {
-    color: #FFF;
+    color: var(--mainwhite);
   }
 
   .header__navright {
@@ -122,10 +122,10 @@
     border-radius: 40px;
     border-color: transparent;
     background: #333;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--mainfont);
     font-weight: 500;
-    font-size: 16px;
-    color: #FFF;
+    font-size: var(--mainfs);
+    color: var(--mainwhite);
   }
 
   .header__sign {
@@ -136,9 +136,9 @@
     border-radius: 40px;
     border-color: transparent;
     background: #EF4934;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--mainfont);
     font-weight: 500;
-    font-size: 16px;
-    color: #FFF;
+    font-size: var(--mainfs);
+    color: var(--mainwhite);
   }
 }

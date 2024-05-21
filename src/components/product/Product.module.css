@@ -48,10 +48,8 @@
   margin: 20px 0;
 }
 
-.card__cart {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.card__button > svg > path {
+  stroke: var(--text-maincolor);
 }
 
 .card__img {

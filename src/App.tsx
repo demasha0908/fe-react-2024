@@ -9,6 +9,11 @@ import styles from './App.module.css';
 
 function App() {
     const [shouldShowAbout, setShouldShowAbout] = useState<boolean>(true);
+    const [theme, setTheme] = useState('light');
+    const changeTheme = () => {
+        const stateTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(stateTheme);
+    };
 
     const toggleAbout = (isShowAbout: boolean) => {
         setShouldShowAbout(isShowAbout);
@@ -16,11 +21,13 @@ function App() {
 
     return (
         <>
-            <HeaderComponent shouldShowAbout={shouldShowAbout} toggleAboutState={toggleAbout} />
-            <main>
-                <div className={styles.container}>{shouldShowAbout ? <AboutComponent /> : <ProductList />}</div>
-            </main>
-            <FooterComponent />
+            <div className={`${theme}-theme`}>
+                <HeaderComponent shouldShowAbout={shouldShowAbout} toggleAboutState={toggleAbout} showTheme={changeTheme} />
+                <main>
+                    <div className={styles.container}>{shouldShowAbout ? <AboutComponent /> : <ProductList />}</div>
+                </main>
+                <FooterComponent />
+            </div>
         </>
     );
 }
