@@ -11,8 +11,8 @@ function App() {
     const [shouldShowAbout, setShouldShowAbout] = useState<boolean>(true);
     const [theme, setTheme] = useState('light');
     const changeTheme = () => {
-        const stateTheme = theme === 'light' ? 'dark' : 'light';
-        setTheme(stateTheme);
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
     };
 
     const toggleAbout = (isShowAbout: boolean) => {
@@ -22,7 +22,7 @@ function App() {
     return (
         <>
             <div className={`${theme}-theme`}>
-                <HeaderComponent shouldShowAbout={shouldShowAbout} toggleAboutState={toggleAbout} showTheme={changeTheme} />
+                <HeaderComponent shouldShowAbout={shouldShowAbout} toggleAboutState={toggleAbout} changeTheme={changeTheme} />
                 <main>
                     <div className={styles.container}>{shouldShowAbout ? <AboutComponent /> : <ProductList />}</div>
                 </main>

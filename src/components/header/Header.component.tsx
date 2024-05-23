@@ -11,9 +11,9 @@ import styles from './header.module.css';
 interface HeaderProps {
     shouldShowAbout: boolean;
     toggleAboutState: (isShowAbout: boolean) => void;
-    showTheme: () => void;
+    changeTheme: () => void;
 }
-function HeaderComponent({ shouldShowAbout, toggleAboutState, showTheme }: HeaderProps) {
+function HeaderComponent({ shouldShowAbout, toggleAboutState, changeTheme }: HeaderProps) {
     const showAbout = () => {
         toggleAboutState(true);
     };
@@ -28,11 +28,11 @@ function HeaderComponent({ shouldShowAbout, toggleAboutState, showTheme }: Heade
                 <div className={styles.wrapper}>
                     <img className={styles.logo} src={logo} alt="logo" />
                     <div className={styles.header__themes}>
-                        <button className={`${styles.header__themeBtn} ${styles.header__themeBtnactive}`} onClick={showTheme}>
+                        <button className={`${styles.header__themeBtn} ${styles.header__themeBtnactive}`} onClick={changeTheme}>
                             <img className={styles.header__themeimg} src={LightThemeBtn} alt="LightTheme" />
                         </button>
                         <img className={styles.divider} src={Divider} alt="Divider" />
-                        <button className={styles.header__themeBtn} onClick={showTheme}>
+                        <button className={styles.header__themeBtn} onClick={changeTheme}>
                             <img className={styles.header__themeimg} src={DarkThemeBtn} alt="DarkTheme" />
                         </button>
                     </div>

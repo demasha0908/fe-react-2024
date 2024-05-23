@@ -1,5 +1,9 @@
+.footer {
+  margin: 60px 30px 0;
+}
+
 .footer__content {
-  padding: 30px 0;
+  padding: 30px 0 0;
   border-top: 1px solid #CCC;
   display: flex;
   flex-direction: column;
@@ -7,9 +11,9 @@
 }
 
 .footer__text {
-  margin-top: 30px;
+  margin: 33px;
   font-family: var(--mainfont);
-  font-weight: var(--mainfw);
+  font-weight: 400;
   font-size: var(--mainfs);
   text-align: center;
   color: var(--text-maincolor);
@@ -46,7 +50,7 @@
 @media (min-width: 1280px) {
 
   .footer {
-    margin-top: 143px;
+    margin: 143px 66px 0;
   }
 
   .footer__content {

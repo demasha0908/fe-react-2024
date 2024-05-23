@@ -11,11 +11,13 @@ import styles from './Product.module.css';
 const ProductList = () => (
     <section className={styles.product__section}>
         <SearchBar />
-        <ul className={styles.product__list}>
-            {data.map((product: Product) => (
-                <ProductCard key={product.id} product={product} />
-            ))}
-        </ul>
+        <div className={styles.container}>
+            <ul className={styles.product__list}>
+                {data.map((product: Product) => (
+                    <ProductCard key={product.id} product={product} />
+                ))}
+            </ul>
+        </div>
     </section>
 );
 
