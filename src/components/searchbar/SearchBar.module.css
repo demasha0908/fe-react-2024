@@ -80,7 +80,6 @@
   font-size: 14px;
   border: 1px solid var(--border-secondary);
   border-radius: 20px;
-  background-color: var(--bg-maincolor);
 
   &:hover {
     color: var(--mainwhite);

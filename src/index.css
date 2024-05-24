@@ -1,5 +1,4 @@
 :root {
-  color-scheme: light dark;
 
   --mainfont: "Montserrat", sans-serif;
   --mainfw: 400;
@@ -9,30 +8,6 @@
   --mainorange: #EF4934;
   --mainhover-orange: #D43824;
   --mainhover-gray: #585858;
-
-  .light-theme {
-    --text-maincolor: #111;
-    --bg-maincolor: #FFF;
-    --text-primary: #333;
-    --text-secondary: #656565;
-    --bg-secondary: #F1F1F1;
-    --bg-dropdown: #FFF;
-    --border-primary: #CCC;
-    --border-secondary: #E1E1E1;
-  }
-
-  .dark-theme {
-    color: #FFF;
-    background-color: #111;
-    --text-maincolor: #FFF;
-    --bg-maincolor: #111;
-    --text-primary: #FFF;
-    --text-secondary: #FFF;
-    --bg-secondary: #333;
-    --bg-dropdown: #333;
-    --border-primary: #333;
-    --border-secondary: #656565;
-  }
 }
 
 * {

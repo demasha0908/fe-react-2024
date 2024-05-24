@@ -1,5 +1,5 @@
 .about__textlink {
-  color: var(--text-maincolor);
+  color: inherit;
   text-decoration: underline;
 }
 

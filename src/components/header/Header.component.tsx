@@ -1,25 +1,34 @@
+import React, { useState } from 'react';
+
 import Divider from '@/assets/divider.svg';
 import loginicon from '@/assets/login.svg';
 import logo from '@/assets/logo.svg';
 import mobilemenu from '@/assets/mobilemenu.svg';
-import DarkThemeBtn from '@/assets/moon.svg';
+import { MoonIcon } from '@/assets/Moon.tsx';
 import signicon from '@/assets/sign.svg';
-import LightThemeBtn from '@/assets/sun.svg';
+import { SunIcon } from '@/assets/Sun.tsx';
+import type { ActiveTheme } from '@/interfaces/Themes.ts';
 
 import styles from './header.module.css';
-
 interface HeaderProps {
     shouldShowAbout: boolean;
     toggleAboutState: (isShowAbout: boolean) => void;
-    changeTheme: () => void;
+    onThemeChange: (theme: ActiveTheme) => void;
+    currentTheme: ActiveTheme;
 }
-function HeaderComponent({ shouldShowAbout, toggleAboutState, changeTheme }: HeaderProps) {
+function HeaderComponent({ shouldShowAbout, toggleAboutState, onThemeChange, currentTheme }: HeaderProps) {
     const showAbout = () => {
         toggleAboutState(true);
     };
-
     const showProducts = () => {
         toggleAboutState(false);
+    };
+
+    const [activeTheme, setActiveTheme] = useState<ActiveTheme>(currentTheme);
+
+    const changeTheme = (theme: ActiveTheme) => {
+        setActiveTheme(theme);
+        onThemeChange(theme);
     };
 
     return (
@@ -28,15 +37,17 @@ function HeaderComponent({ shouldShowAbout, toggleAboutState, changeTheme }: Hea
                 <div className={styles.wrapper}>
                     <img className={styles.logo} src={logo} alt="logo" />
                     <div className={styles.header__themes}>
-                        <button className={`${styles.header__themeBtn} ${styles.header__themeBtnactive}`} onClick={changeTheme}>
-                            <img className={styles.header__themeimg} src={LightThemeBtn} alt="LightTheme" />
+                        <button
+                            className={`${styles.header__themeBtn} ${styles.header__themeBtnactive}`}
+                            onClick={() => changeTheme('light')}
+                        >
+                            <SunIcon theme={activeTheme} />
                         </button>
                         <img className={styles.divider} src={Divider} alt="Divider" />
-                        <button className={styles.header__themeBtn} onClick={changeTheme}>
-                            <img className={styles.header__themeimg} src={DarkThemeBtn} alt="DarkTheme" />
+                        <button className={styles.header__themeBtn} onClick={() => changeTheme('dark')}>
+                            <MoonIcon theme={activeTheme} />
                         </button>
                     </div>
-
                     <nav className={styles.header__nav}>
                         <ul className={styles.header__navwrapper}>
                             <li>
@@ -74,7 +85,6 @@ function HeaderComponent({ shouldShowAbout, toggleAboutState, changeTheme }: Hea
                             <img className={styles.header__loginicon} src={loginicon} alt="Login" />
                             Login
                         </button>
-
                         <button className={styles.header__sign} title="Sign">
                             <img className={styles.header__signicon} src={signicon} alt="Sign" />
                             Sign Up
@@ -85,5 +95,4 @@ function HeaderComponent({ shouldShowAbout, toggleAboutState, changeTheme }: Hea
         </>
     );
 }
-
 export default HeaderComponent;
