@@ -1,5 +1,5 @@
 .about__textlink {
-  color: #111;
+  color: inherit;
   text-decoration: underline;
 }
 
@@ -83,7 +83,7 @@
 
   .about__paragraph {
     font-size: 22px;
-    font-weight: 400;
+    font-weight: var(--mainfw);
     margin-bottom: 25px;
   }
 

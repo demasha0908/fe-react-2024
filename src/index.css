@@ -1,3 +1,15 @@
+:root {
+
+  --mainfont: "Montserrat", sans-serif;
+  --mainfw: 400;
+  --mainfs: 16px;
+
+  --mainwhite: #FFF;
+  --mainorange: #EF4934;
+  --mainhover-orange: #D43824;
+  --mainhover-gray: #585858;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -17,9 +29,9 @@ body {
 
 body {
   justify-content: center;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
+  font-family: var(--mainfont);
+  font-weight: var(--mainfw);
+  font-size: var(--mainfs);
 }
 
 ul {
@@ -40,3 +52,4 @@ button {
   border: none;
   cursor: pointer;
 }
+

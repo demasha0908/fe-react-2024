@@ -1,4 +1,29 @@
 body {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+}
+
+.light {
+  --text-maincolor: #111;
+  --bg-maincolor: #FFF;
+  --text-primary: #333;
+  --text-secondary: #656565;
+  --bg-secondary: #F1F1F1;
+  --bg-dropdown: #FFF;
+  --border-primary: #CCC;
+  --border-secondary: #E1E1E1;
+}
+
+.dark {
+  color: #FFF;
+  background-color: #111;
+  --text-maincolor: #FFF;
+  --bg-maincolor: #111;
+  --text-primary: #FFF;
+  --text-secondary: #FFF;
+  --bg-secondary: #333;
+  --bg-dropdown: #333;
+  --border-primary: #333;
+  --border-secondary: #656565;
 }

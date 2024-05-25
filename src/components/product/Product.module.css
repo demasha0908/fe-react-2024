@@ -1,7 +1,8 @@
 .product__card {
   padding: 20px 15px 15px;
-  border: 1px solid #CCC;
+  border: 1px solid var(--border-primary);
   border-radius: 20px;
+  max-width: 275px;
 }
 
 .product__container {
@@ -48,10 +49,8 @@
   margin: 20px 0;
 }
 
-.card__cart {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.card__button > svg > path {
+  stroke: var(--text-maincolor);
 }
 
 .card__img {
@@ -59,5 +58,12 @@
   width: 201px;
   height: 205px;
   object-fit: cover;
-  margin: 0 22px;
+}
+
+@media (min-width: 980px) {
+
+  .product__list {
+    grid-row-gap: 15px;
+    margin: 53px;
+  }
 }
