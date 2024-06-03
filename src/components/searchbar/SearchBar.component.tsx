@@ -161,7 +161,7 @@ export const SearchBar: React.FC<SearchProps> = ({ products, currentPage, onPage
                     </button>
 
                     {isDropdownOpen && (
-                        <ul className={styles.dropdown__content} ref={dropdownReference}>
+                        <ul className={styles.dropdown__content}>
                             {filteredFilters.map((item) => (
                                 <li
                                     role="button"
