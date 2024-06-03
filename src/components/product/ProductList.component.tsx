@@ -25,7 +25,7 @@ export default function ProductList() {
 
                 setTotalPages(Math.ceil(data.length / 8));
             });
-    }, [currentPage]);
+    });
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
