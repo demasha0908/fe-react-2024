@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { Pagination } from '@/components/product/Pagination.component.tsx';
+import { Pagination } from '@/components/pagination/Pagination.component.tsx';
 import { ProductsComponent } from '@/components/product/Products.component.tsx';
 import { SearchBar } from '@/components/searchbar/SearchBar.component.tsx';
 import type { Product } from '@/interfaces/Product.ts';
+import getData from '@/utils/getData.ts';
+import { getPaginatedProducts } from '@/utils/getPaginated.ts';
 
 import styles from './Product.module.css';
 
@@ -16,16 +18,19 @@ export default function ProductList() {
     const [currentPage, setCurrentPage] = useState<number>(1);
 
     useEffect(() => {
-        fetch(apiUrl)
-            .then((response) => response.json())
+        getData(apiUrl)
             .then((data) => {
                 setProducts(data);
-                const paginated = getPaginatedProducts(data);
-                setPaginatedProducts(paginated);
+            })
+            .catch((error) => console.error(error));
+    }, []);
 
-                setTotalPages(Math.ceil(data.length / 8));
-            });
-    });
+    useEffect(() => {
+        const paginated = getPaginatedProducts(products, currentPage);
+        setPaginatedProducts(paginated);
+
+        setTotalPages(Math.ceil(products.length / 8));
+    }, [products, currentPage]);
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
@@ -33,12 +38,10 @@ export default function ProductList() {
 
     const handleFilteredProducts = (filteredProducts: Product[]) => {
         setPaginatedProducts(filteredProducts);
-        const paginated = getPaginatedProducts(filteredProducts);
+        const paginated = getPaginatedProducts(filteredProducts, currentPage);
         setPaginatedProducts(paginated);
         setTotalPages(Math.ceil(filteredProducts.length / 8));
     };
-
-    const getPaginatedProducts = (data: Product[]): Product[] => data.slice((currentPage - 1) * 8, currentPage * 8);
 
     return (
         <section className={styles.product__section}>

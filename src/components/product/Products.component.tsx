@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styles from '@/components/product/Product.module.css';
 import ProductCard from '@/components/product/ProductCard.component.tsx';
 import type { Product } from '@/interfaces/Product.ts';

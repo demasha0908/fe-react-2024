@@ -1,5 +1,3 @@
-import React from 'react';
-
 import type { Product } from '@/interfaces/Product';
 
 import styles from './Product.module.css';

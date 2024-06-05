@@ -23,6 +23,12 @@
   background: var(--mainhover-gray);
 }
 
+.arrowButton:disabled {
+  cursor: default;
+  background: none;
+}
+
+
 .pageNumber {
   font-family: var(--mainfont);
   width: 32px;

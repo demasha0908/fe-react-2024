@@ -55,7 +55,7 @@ export const SearchBar: React.FC<SearchProps> = ({ products, currentPage, onPage
             }
         }
         onFilteredProducts(filtered);
-    }, [activeFilter, searchTerm, activeCategories, products, currentPage]);
+    }, [activeFilter, searchTerm, activeCategories, products, currentPage, onFilteredProducts]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

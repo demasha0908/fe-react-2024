@@ -13,6 +13,7 @@ interface PaginationProps {
 
 export const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange, currentPage }) => {
     const [activePage, setActivePage] = useState<number>(currentPage);
+    const DOTS = '...';
 
     const getPagination = (): (string | number)[] => {
         const pages = [];
@@ -47,25 +48,27 @@ export const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange
     }, [currentPage]);
 
     const handleClick = (page: number | string) => {
-        if (page === '...') return;
+        if (page === DOTS) return;
         setActivePage(page as number);
         onPageChange(page as number);
     };
 
     const handlePreviousClick = () => {
         if (activePage > 1) {
-            const newPage = activePage - 1;
-            setActivePage(newPage);
-            onPageChange(newPage);
+            return;
         }
+        const newPage = activePage - 1;
+        setActivePage(newPage);
+        onPageChange(newPage);
     };
 
     const handleNextClick = () => {
-        if (activePage < totalPages) {
-            const newPage = activePage + 1;
-            setActivePage(newPage);
-            onPageChange(newPage);
+        if (activePage >= totalPages) {
+            return;
         }
+        const newPage = activePage + 1;
+        setActivePage(newPage);
+        onPageChange(newPage);
     };
 
     return (
