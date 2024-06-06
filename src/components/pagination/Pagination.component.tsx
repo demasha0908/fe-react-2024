@@ -1,98 +1,96 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { LeftArrowIcon } from '@/assets/LeftArrow.tsx';
-import { RightArrowIcon } from '@/assets/RightArrow.tsx';
+import arrowIcon from '@/assets/iconarrowup.svg';
 
 import styles from './Pagination.module.css';
 
 interface PaginationProps {
-    totalPages: number;
-    currentPage: number;
-    onPageChange: (page: number) => void;
+    page: number;
+    limit: number;
+    total: number;
+    setCurrentPage: (page: number) => void;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange, currentPage }) => {
-    const [activePage, setActivePage] = useState<number>(currentPage);
-    const DOTS = '...';
+const getPagination = (page: number, totalPages: number): number[] => {
+    if (totalPages <= 5) {
+        return Array.from({ length: totalPages }, (_, index) => index + 1);
+    } else {
+        const startPage = Math.max(2, page - 1);
+        const endPage = Math.min(totalPages - 1, page + 1);
 
-    const getPagination = (): (string | number)[] => {
-        const pages = [];
-
-        const shouldShowEllipsis = totalPages > 3;
-        const startPage = Math.max(2, activePage - 1);
-        const endPage = Math.min(totalPages - 1, activePage + 1);
-
-        pages.push(1);
-
-        if (shouldShowEllipsis && startPage > 2) {
-            pages.push('...');
+        if (page < 2) {
+            return [1, 2, 3, -1, totalPages];
+        } else if (page <= 3) {
+            return [1, 2, 3, 4, -1, totalPages];
+        } else if (page >= totalPages - 1) {
+            return [1, -1, totalPages - 1, totalPages];
+        } else if (page >= totalPages - 2) {
+            return [1, -1, totalPages - 2, totalPages - 1, totalPages];
+        } else {
+            return [1, -1, startPage, page, endPage, -1, totalPages];
         }
+    }
+};
 
-        for (let index = startPage; index <= endPage; index++) {
-            pages.push(index);
-        }
+export const Pagination: React.FC<PaginationProps> = ({ page, limit, total, setCurrentPage }) => {
+    const totalPages = Math.ceil(total / limit);
+    if (totalPages === 0) {
+        return <></>;
+    }
 
-        if (shouldShowEllipsis && endPage < totalPages - 1) {
-            pages.push('...');
-        }
+    const currentPage = page > totalPages ? 0 : page;
 
-        if (totalPages > 1) {
-            pages.push(totalPages);
-        }
-
-        return pages;
-    };
-
-    useEffect(() => {
-        setActivePage(currentPage);
-    }, [currentPage]);
-
-    const handleClick = (page: number | string) => {
-        if (page === DOTS) return;
-        setActivePage(page as number);
-        onPageChange(page as number);
-    };
-
-    const handlePreviousClick = () => {
-        if (activePage > 1) {
-            return;
-        }
-        const newPage = activePage - 1;
-        setActivePage(newPage);
-        onPageChange(newPage);
-    };
-
-    const handleNextClick = () => {
-        if (activePage >= totalPages) {
-            return;
-        }
-        const newPage = activePage + 1;
-        setActivePage(newPage);
-        onPageChange(newPage);
-    };
+    const setPreviousPage = (pageNumber: number) => setCurrentPage(pageNumber <= 1 ? 1 : pageNumber - 1);
+    const setNextPage = (pageNumber: number) => setCurrentPage(pageNumber >= totalPages ? totalPages : pageNumber + 1);
 
     return (
-        <div className={styles.paginationWrapper}>
-            <button onClick={handlePreviousClick} className={styles.arrowButton} disabled={activePage === 1}>
-                <LeftArrowIcon disable={activePage === 1} />
-            </button>
-
-            {getPagination().map((page, index) => (
-                <button
-                    key={index}
-                    onClick={() => handleClick(page)}
-                    disabled={typeof page === 'string'}
-                    className={
-                        typeof page === 'number' ? `${styles.pageNumber} ${page === activePage ? styles.selectedPage : ''}` : styles.dots
-                    }
-                >
-                    {page}
-                </button>
-            ))}
-
-            <button onClick={handleNextClick} className={styles.arrowButton} disabled={activePage === totalPages}>
-                <RightArrowIcon disable={activePage === totalPages} />
-            </button>
-        </div>
+        <nav className={styles.pagination__wrapper}>
+            <ul className={styles.pagination__list}>
+                <li>
+                    <button
+                        className={`${styles.pagination__button} ${styles.pagination__button_arrow}`}
+                        onClick={() => setPreviousPage(currentPage)}
+                        disabled={currentPage === 1}
+                    >
+                        <img
+                            className={`${styles.pagination__arrow_left} ${page === 1 ? styles.pagination__arrow_inactive : ''}`}
+                            src={arrowIcon}
+                            alt="Icon arrow left"
+                            width="18px"
+                            height="18px"
+                        />
+                    </button>
+                </li>
+                {getPagination(currentPage, totalPages).map((pageNumber, index) => (
+                    <li key={index}>
+                        {pageNumber === -1 ? (
+                            <span className={`${styles.pagination__button} ${styles.pagination__button_empty}`}>...</span>
+                        ) : (
+                            <button
+                                className={`${styles.pagination__button} ${pageNumber === currentPage ? styles.pagination__button_active : ''}`}
+                                onClick={() => setCurrentPage(pageNumber)}
+                            >
+                                {pageNumber}
+                            </button>
+                        )}
+                    </li>
+                ))}
+                <li>
+                    <button
+                        className={`${styles.pagination__button} ${styles.pagination__button_arrow}`}
+                        onClick={() => setNextPage(currentPage)}
+                        disabled={currentPage === totalPages}
+                    >
+                        <img
+                            className={`${styles.pagination__arrow_right} ${page === totalPages ? styles.pagination__arrow_inactive : ''}`}
+                            src={arrowIcon}
+                            alt="Icon arrow right"
+                            width="18px"
+                            height="18px"
+                        />
+                    </button>
+                </li>
+            </ul>
+        </nav>
     );
 };

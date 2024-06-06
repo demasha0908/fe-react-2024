@@ -2,20 +2,27 @@ import React, { useEffect, useState } from 'react';
 
 import { Pagination } from '@/components/pagination/Pagination.component.tsx';
 import { ProductsComponent } from '@/components/product/Products.component.tsx';
-import { SearchBar } from '@/components/searchbar/SearchBar.component.tsx';
+import { SearchBar } from '@/components/prolyfilters/SearchBar.component.tsx';
+import { useFilteredProducts, usePaginatedProducts, useSearchedProducts, useSortedProducts } from '@/hooks/productHooks.ts';
 import type { Product } from '@/interfaces/Product.ts';
 import getData from '@/utils/getData.ts';
-import { getPaginatedProducts } from '@/utils/getPaginated.ts';
 
 import styles from './Product.module.css';
 
 export default function ProductList() {
     const apiUrl = 'https://ma-backend-api.mocintra.com/api/v1/products';
     const [products, setProducts] = useState<Product[]>([]);
-    const [totalPages, setTotalPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [filters, setFilters] = useState<string[]>([]);
+    const [sort, setSort] = useState<string>('newest');
+    const [searchQuery, setSearchQuery] = useState<string>('');
 
-    const [paginatedProducts, setPaginatedProducts] = useState<Product[]>([]);
-    const [currentPage, setCurrentPage] = useState<number>(1);
+    const itemsPerPage = 8;
+
+    const filteredProducts = useFilteredProducts(products, filters);
+    const searchedProducts = useSearchedProducts(filteredProducts, searchQuery);
+    const sortedProducts = useSortedProducts(searchedProducts, sort);
+    const shownProducts = usePaginatedProducts(sortedProducts, currentPage, itemsPerPage);
 
     useEffect(() => {
         getData(apiUrl)
@@ -25,34 +32,18 @@ export default function ProductList() {
             .catch((error) => console.error(error));
     }, []);
 
-    useEffect(() => {
-        const paginated = getPaginatedProducts(products, currentPage);
-        setPaginatedProducts(paginated);
-
-        setTotalPages(Math.ceil(products.length / 8));
-    }, [products, currentPage]);
-
-    const handlePageChange = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    const handleFilteredProducts = (filteredProducts: Product[]) => {
-        setPaginatedProducts(filteredProducts);
-        const paginated = getPaginatedProducts(filteredProducts, currentPage);
-        setPaginatedProducts(paginated);
-        setTotalPages(Math.ceil(filteredProducts.length / 8));
+    const handleFilterChange = (filter: string) => {
+        setFilters((previousFilters) =>
+            previousFilters.includes(filter) ? previousFilters.filter((f) => f !== filter) : [...previousFilters, filter],
+        );
+        setCurrentPage(1);
     };
 
     return (
         <section className={styles.product__section}>
-            <SearchBar
-                products={products}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-                onFilteredProducts={handleFilteredProducts}
-            />
-            <ProductsComponent products={paginatedProducts} />
-            <Pagination totalPages={totalPages} onPageChange={handlePageChange} currentPage={currentPage} />
+            <SearchBar setFilter={handleFilterChange} setSort={setSort} setSearchQuery={setSearchQuery} />
+            <ProductsComponent products={shownProducts} />
+            <Pagination page={currentPage} limit={itemsPerPage} total={sortedProducts.length} setCurrentPage={setCurrentPage} />
         </section>
     );
 }

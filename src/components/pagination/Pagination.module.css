@@ -1,65 +1,59 @@
-.paginationWrapper {
+.pagination__wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding-bottom: 30px;
-  margin-top: 60px;
+  min-height: 100px;
 }
 
-.arrowButton {
-  width: 32px;
-  height: 32px;
-  box-shadow: 0 0 0 1px var(--pagehover);
-  color: var(--text-maincolor);
-  border-radius: 8px;
+.pagination__list {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  list-style-type: none;
   padding: 0;
+  margin: 0;
+  gap: 10px;
 }
 
-.arrowButton:hover {
-  border: none;
-  background: var(--mainhover-gray);
-}
-
-.arrowButton:disabled {
-  cursor: default;
-  background: none;
-}
-
-
-.pageNumber {
+.pagination__button {
+  color: var(--text-maincolor);
+  border: 1px solid var(--border-secondary);
   font-family: var(--mainfont);
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 8px;
   width: 32px;
   height: 32px;
-  box-shadow: 0 0 0 1px var(--pagehover);
-  color: var(--text-maincolor);
-  border-radius: 8px;
+}
+
+.pagination__arrow_left {
+  filter: var(--color-icon-svg);
+  transform: rotate(270deg);
+}
+
+.pagination__arrow_right {
+  filter: var(--color-icon-svg);
+  transform: rotate(90deg);
+}
+
+.pagination__button_arrow {
+  font-size: 1.25rem;
+}
+
+.pagination__button_active {
+  background-color: var(--mainorange);
+  color: var(--mainwhite);
+}
+
+.pagination__button_empty {
+  border: none;
+  cursor: default;
   font-size: 14px;
   font-weight: 500;
-  line-height: 17px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 5px;
 }
 
-.pageNumber:hover {
-  background: var(--mainhover-orange);
-  border: none;
-}
-
-.selectedPage {
-  background: var(--mainorange);
-  color: var(--mainwhite);
-  font-weight: 700;
-  border: none;
-}
-
-.dots {
-  color: var(--text-maincolor);
-  font-weight: 500;
-  font-family: var(--mainfont);
-  margin: 0 11px;
+.pagination__arrow_inactive {
+  filter: brightness(.6);
 }
