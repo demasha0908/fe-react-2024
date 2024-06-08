@@ -8,6 +8,8 @@
   --mainorange: #EF4934;
   --mainhover-orange: #D43824;
   --mainhover-gray: #585858;
+
+  --disablebtn: #CCC;
 }
 
 * {

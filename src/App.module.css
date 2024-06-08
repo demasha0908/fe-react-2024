@@ -5,6 +5,7 @@ body {
 }
 
 .light {
+  --color-icon-svg: brightness(0);
   --text-maincolor: #111;
   --bg-maincolor: #FFF;
   --text-primary: #333;
@@ -13,10 +14,14 @@ body {
   --bg-dropdown: #FFF;
   --border-primary: #CCC;
   --border-secondary: #E1E1E1;
+  --border-third: #656565;
+  --pagehover: #F1F1F1;
 }
 
 .dark {
   color: #FFF;
+  --color-icon-svg: brightness(100);
+
   background-color: #111;
   --text-maincolor: #FFF;
   --bg-maincolor: #111;
@@ -26,4 +31,6 @@ body {
   --bg-dropdown: #333;
   --border-primary: #333;
   --border-secondary: #656565;
+  --border-third: #CCC;
+  --pagehover: #FFF;
 }
