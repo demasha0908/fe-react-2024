@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Divider from '@/assets/divider.svg';
 import loginicon from '@/assets/login.svg';
@@ -11,19 +12,10 @@ import type { ActiveTheme } from '@/interfaces/Themes.ts';
 
 import styles from './header.module.css';
 interface HeaderProps {
-    shouldShowAbout: boolean;
-    toggleAboutState: (isShowAbout: boolean) => void;
     onThemeChange: (theme: ActiveTheme) => void;
     currentTheme: ActiveTheme;
 }
-function HeaderComponent({ shouldShowAbout, toggleAboutState, onThemeChange, currentTheme }: HeaderProps) {
-    const showAbout = () => {
-        toggleAboutState(true);
-    };
-    const showProducts = () => {
-        toggleAboutState(false);
-    };
-
+function HeaderComponent({ onThemeChange, currentTheme }: HeaderProps) {
     const [activeTheme, setActiveTheme] = useState<ActiveTheme>(currentTheme);
 
     const changeTheme = (theme: ActiveTheme) => {
@@ -51,20 +43,14 @@ function HeaderComponent({ shouldShowAbout, toggleAboutState, onThemeChange, cur
                     <nav className={styles.header__nav}>
                         <ul className={styles.header__navwrapper}>
                             <li>
-                                <button
-                                    className={`${styles.header__link} ${shouldShowAbout ? styles.header__linkactive : ''}`}
-                                    onClick={showAbout}
-                                >
+                                <Link className={styles.header__link} to="/">
                                     About
-                                </button>
+                                </Link>
                             </li>
                             <li>
-                                <button
-                                    className={`${styles.header__link} ${shouldShowAbout ? '' : styles.header__linkactive}`}
-                                    onClick={showProducts}
-                                >
+                                <Link className={styles.header__link} to="products">
                                     Products
-                                </button>
+                                </Link>
                             </li>
                         </ul>
                     </nav>
