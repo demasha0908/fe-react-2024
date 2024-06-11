@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import Divider from '@/assets/divider.svg';
 import loginicon from '@/assets/login.svg';
@@ -9,6 +8,8 @@ import { MoonIcon } from '@/assets/Moon.tsx';
 import signicon from '@/assets/sign.svg';
 import { SunIcon } from '@/assets/Sun.tsx';
 import type { ActiveTheme } from '@/interfaces/Themes.ts';
+
+import { HeaderNavigationComponent } from './HeaderNavigation.tsx';
 
 import styles from './header.module.css';
 interface HeaderProps {
@@ -41,18 +42,7 @@ function HeaderComponent({ onThemeChange, currentTheme }: HeaderProps) {
                         </button>
                     </div>
                     <nav className={styles.header__nav}>
-                        <ul className={styles.header__navwrapper}>
-                            <li>
-                                <Link className={styles.header__link} to="/">
-                                    About
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className={styles.header__link} to="products">
-                                    Products
-                                </Link>
-                            </li>
-                        </ul>
+                        <HeaderNavigationComponent />
                     </nav>
 
                     <div className={styles.header__navright}>

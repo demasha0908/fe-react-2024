@@ -18,7 +18,7 @@ export function useSearchedProducts(products: Product[], searchQuery: string) {
 
 export function useSortedProducts(products: Product[], sort: string) {
     return useMemo(() => {
-        const sortedProducts = [...products]; // Create a copy of the products array
+        const sortedProducts = [...products];
         sortedProducts.sort((a, b) => {
             switch (sort) {
                 case 'highToLow': {

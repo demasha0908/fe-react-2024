@@ -3,22 +3,12 @@ import { Outlet } from 'react-router-dom';
 
 import FooterComponent from '@/components/footer/Footer.component';
 import HeaderComponent from '@/components/header/Header.component';
+import { getInitialTheme } from '@/components/themeswitch/ThemeSwitch.tsx';
 import type { ActiveTheme } from '@/interfaces/Themes.ts';
 
 import styles from './Layout.module.css';
 
 export const LayoutComponent = () => {
-    const getInitialTheme = () => {
-        const savedTheme = localStorage.getItem('theme') as ActiveTheme;
-
-        if (savedTheme) {
-            return savedTheme;
-        }
-
-        const isLightMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-        return isLightMode ? 'light' : 'dark';
-    };
-
     const [theme, setTheme] = useState<ActiveTheme>(() => getInitialTheme());
 
     const handleThemeChange = (newTheme: ActiveTheme) => {
