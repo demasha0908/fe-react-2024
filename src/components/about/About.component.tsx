@@ -2,7 +2,7 @@ import generalimg from '@/assets/generalimg.png';
 
 import styles from './about.module.css';
 
-export function AboutComponent() {
+export function AboutPage() {
     return (
         <div className={styles.about}>
             <div className={styles.about__imgBox}>
@@ -46,4 +46,4 @@ export function AboutComponent() {
     );
 }
 
-export default AboutComponent;
+export default AboutPage;

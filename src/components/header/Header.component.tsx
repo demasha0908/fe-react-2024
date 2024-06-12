@@ -9,21 +9,14 @@ import signicon from '@/assets/sign.svg';
 import { SunIcon } from '@/assets/Sun.tsx';
 import type { ActiveTheme } from '@/interfaces/Themes.ts';
 
+import { HeaderNavigationComponent } from './HeaderNavigation.tsx';
+
 import styles from './header.module.css';
 interface HeaderProps {
-    shouldShowAbout: boolean;
-    toggleAboutState: (isShowAbout: boolean) => void;
     onThemeChange: (theme: ActiveTheme) => void;
     currentTheme: ActiveTheme;
 }
-function HeaderComponent({ shouldShowAbout, toggleAboutState, onThemeChange, currentTheme }: HeaderProps) {
-    const showAbout = () => {
-        toggleAboutState(true);
-    };
-    const showProducts = () => {
-        toggleAboutState(false);
-    };
-
+function HeaderComponent({ onThemeChange, currentTheme }: HeaderProps) {
     const [activeTheme, setActiveTheme] = useState<ActiveTheme>(currentTheme);
 
     const changeTheme = (theme: ActiveTheme) => {
@@ -49,24 +42,7 @@ function HeaderComponent({ shouldShowAbout, toggleAboutState, onThemeChange, cur
                         </button>
                     </div>
                     <nav className={styles.header__nav}>
-                        <ul className={styles.header__navwrapper}>
-                            <li>
-                                <button
-                                    className={`${styles.header__link} ${shouldShowAbout ? styles.header__linkactive : ''}`}
-                                    onClick={showAbout}
-                                >
-                                    About
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    className={`${styles.header__link} ${shouldShowAbout ? '' : styles.header__linkactive}`}
-                                    onClick={showProducts}
-                                >
-                                    Products
-                                </button>
-                            </li>
-                        </ul>
+                        <HeaderNavigationComponent />
                     </nav>
 
                     <div className={styles.header__navright}>

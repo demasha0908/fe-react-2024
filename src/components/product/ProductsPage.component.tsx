@@ -9,7 +9,7 @@ import getData from '@/utils/getData.ts';
 
 import styles from './Product.module.css';
 
-export default function ProductList() {
+export default function ProductsPage() {
     const apiUrl = 'https://ma-backend-api.mocintra.com/api/v1/products';
     const [products, setProducts] = useState<Product[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +27,7 @@ export default function ProductList() {
     useEffect(() => {
         getData(apiUrl)
             .then((data) => {
-                setProducts(data);
+                setProducts(data.products);
             })
             .catch((error) => console.error(error));
     }, []);
