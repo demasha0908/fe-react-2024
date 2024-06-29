@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Selectors } from '@/components/selector/Selector.component.tsx';
+import type { Category } from '@/interfaces/Category';
 
 import styles from './SearchBar.module.css';
 
@@ -10,15 +11,19 @@ interface SearchProps {
     setSearchQuery: (query: string) => void;
 }
 
-export const SearchBar: React.FC<SearchProps> = ({ setFilter, setSort, setSearchQuery }) => {
-    const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+const categories: Readonly<Pick<Category, 'id' | 'name'>[]> = [
+    { id: 2, name: 'Electronics' },
+    { id: 4, name: 'Shoes' },
+    { id: 1, name: 'Clothes' },
+];
+
+export function SearchBar({ setFilter, setSort, setSearchQuery }: SearchProps) {
+    const [selectedFilter, setSelectedFilter] = useState<string>('');
     const [searchInput, setSearchInput] = useState<string>('');
 
-    const handleFilterChange = (filter: string) => {
-        setSelectedFilters((previousFilters) =>
-            previousFilters.includes(filter) ? previousFilters.filter((f) => f !== filter) : [...previousFilters, filter],
-        );
-        setFilter(filter);
+    const handleFilterChange = (filterID: string) => {
+        setSelectedFilter(filterID);
+        return setFilter(filterID);
     };
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,24 +56,15 @@ export const SearchBar: React.FC<SearchProps> = ({ setFilter, setSort, setSearch
             </form>
 
             <div className={styles.filters}>
-                <button
-                    className={`${styles.filter__btn} ${selectedFilters.includes('Electronics') ? styles.filters_btn_active : ''}`}
-                    onClick={() => handleFilterChange('Electronics')}
-                >
-                    Electronics
-                </button>
-                <button
-                    className={`${styles.filter__btn} ${selectedFilters.includes('Shoes') ? styles.filters_btn_active : ''}`}
-                    onClick={() => handleFilterChange('Shoes')}
-                >
-                    Shoes
-                </button>
-                <button
-                    className={`${styles.filter__btn} ${selectedFilters.includes('Clothes') ? styles.filters_btn_active : ''}`}
-                    onClick={() => handleFilterChange('Clothes')}
-                >
-                    Clothes
-                </button>
+                {categories.map((category) => (
+                    <button
+                        key={category.id}
+                        className={`${styles.filter__btn} ${selectedFilter === category.id.toString() ? styles.filters_btn_active : ''}`}
+                        onClick={() => handleFilterChange(category.id.toString())}
+                    >
+                        {category.name}
+                    </button>
+                ))}
             </div>
             <div className={styles.sort_by}>
                 <h3 className={styles.sort_by__text}> Sort by:</h3>
@@ -76,4 +72,4 @@ export const SearchBar: React.FC<SearchProps> = ({ setFilter, setSort, setSearch
             </div>
         </div>
     );
-};
+}

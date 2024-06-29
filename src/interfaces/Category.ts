@@ -5,3 +5,14 @@ export interface Category {
     creationAt: string;
     updatedAt: string;
 }
+
+export interface FiltersButtons {
+    name: string;
+    categoryId: number;
+}
+
+export interface SearchProps {
+    setFilter: (filter: string) => void;
+    setSort: (sort: string) => void;
+    setSearchQuery: (query: string) => void;
+}
