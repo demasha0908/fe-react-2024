@@ -1,6 +1,11 @@
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { ErrorMessage } from '@/components/messages/Error.component';
+import { LoadingMessage } from '@/components/messages/Loading.component';
+import { NoFoundMessage } from '@/components/messages/NoFound.component';
 import type { Product } from '@/interfaces/Product';
+import { ProductsDataContext } from '@/utils/Products';
 
 import styles from './Product.module.css';
 
@@ -9,11 +14,25 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+    const { isError, isLoading } = useContext(ProductsDataContext);
+
     const navigate = useNavigate();
 
     const showProductPage = () => {
         navigate(`${product.id}`);
     };
+
+    if (isLoading) {
+        return <LoadingMessage />;
+    }
+
+    if (isError || !product) {
+        return <NoFoundMessage />;
+    }
+
+    if (isError) {
+        return <ErrorMessage />;
+    }
 
     return (
         <li key={product.id} className={styles.product__card}>
@@ -26,9 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     height="205px"
                     onClick={showProductPage}
                 />
-                <h3 className={styles.card__title} onClick={showProductPage}>
-                    {product.title}
-                </h3>
+                <h3 className={styles.card__title}>{product.title}</h3>
                 <div className={styles.card__price}>
                     <div className={styles.card__pricevalue}>
                         {product.price}
