@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import Divider from '@/assets/divider.svg';
 import loginicon from '@/assets/login.svg';
@@ -28,7 +29,9 @@ function HeaderComponent({ onThemeChange, currentTheme }: HeaderProps) {
         <>
             <header className={styles.header}>
                 <div className={styles.wrapper}>
-                    <img className={styles.logo} src={logo} alt="logo" />
+                    <NavLink to="/">
+                        <img className={styles.logo} src={logo} alt="logo" />
+                    </NavLink>
                     <div className={styles.header__themes}>
                         <button
                             className={`${styles.header__themeBtn} ${styles.header__themeBtnactive}`}

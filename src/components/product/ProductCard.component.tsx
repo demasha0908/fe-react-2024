@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { ErrorMessage } from '@/components/messages/Error.component';
 import { LoadingMessage } from '@/components/messages/Loading.component';
@@ -16,12 +15,6 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const { isError, isLoading } = useContext(ProductsDataContext);
 
-    const navigate = useNavigate();
-
-    const showProductPage = () => {
-        navigate(`${product.id}`);
-    };
-
     if (isLoading) {
         return <LoadingMessage />;
     }
@@ -37,14 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     return (
         <li key={product.id} className={styles.product__card}>
             <div className={styles.product__container}>
-                <img
-                    className={styles.card__img}
-                    src={product.images[0]}
-                    alt={product.title}
-                    width="201px"
-                    height="205px"
-                    onClick={showProductPage}
-                />
+                <img className={styles.card__img} src={product.images[0]} alt={product.title} width="201px" height="205px" />
                 <h3 className={styles.card__title}>{product.title}</h3>
                 <div className={styles.card__price}>
                     <div className={styles.card__pricevalue}>

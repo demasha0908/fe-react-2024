@@ -60,7 +60,7 @@ export default function ProductsPage() {
 
     const handleScroll = useCallback(() => {
         if (
-            window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - SCROLL_THRESHOLD &&
+            window.innerHeight + Math.ceil(window.scrollY) >= document.body.scrollHeight - SCROLL_THRESHOLD &&
             !isLoading &&
             currentPage < totalPages
         ) {
