@@ -1,6 +1,10 @@
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
 
+import { ErrorMessage } from '@/components/messages/Error.component';
+import { LoadingMessage } from '@/components/messages/Loading.component';
+import { NoFoundMessage } from '@/components/messages/NoFound.component';
 import type { Product } from '@/interfaces/Product';
+import { ProductsDataContext } from '@/utils/Products';
 
 import styles from './Product.module.css';
 
@@ -9,26 +13,25 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-    const navigate = useNavigate();
+    const { isError, isLoading } = useContext(ProductsDataContext);
 
-    const showProductPage = () => {
-        navigate(`${product.id}`);
-    };
+    if (isLoading) {
+        return <LoadingMessage />;
+    }
+
+    if (isError || !product) {
+        return <NoFoundMessage />;
+    }
+
+    if (isError) {
+        return <ErrorMessage />;
+    }
 
     return (
         <li key={product.id} className={styles.product__card}>
             <div className={styles.product__container}>
-                <img
-                    className={styles.card__img}
-                    src={product.images[0]}
-                    alt={product.title}
-                    width="201px"
-                    height="205px"
-                    onClick={showProductPage}
-                />
-                <h3 className={styles.card__title} onClick={showProductPage}>
-                    {product.title}
-                </h3>
+                <img className={styles.card__img} src={product.images[0]} alt={product.title} width="201px" height="205px" />
+                <h3 className={styles.card__title}>{product.title}</h3>
                 <div className={styles.card__price}>
                     <div className={styles.card__pricevalue}>
                         {product.price}

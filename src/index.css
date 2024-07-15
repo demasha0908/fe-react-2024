@@ -34,6 +34,7 @@ body {
   font-family: var(--mainfont);
   font-weight: var(--mainfw);
   font-size: var(--mainfs);
+  overflow-anchor: none;
 }
 
 ul {
