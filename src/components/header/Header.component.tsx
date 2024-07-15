@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import Divider from '@/assets/divider.svg';
 import loginicon from '@/assets/login.svg';
 import logo from '@/assets/logo.svg';
-import mobilemenu from '@/assets/mobilemenu.svg';
 import { MoonIcon } from '@/assets/Moon.tsx';
 import signicon from '@/assets/sign.svg';
 import { SunIcon } from '@/assets/Sun.tsx';
+import { BurgerMenu } from '@/components/mobilemenu/MobileMenu.component.tsx';
+import { useToggle } from '@/hooks/useToogle.ts';
 import type { ActiveTheme } from '@/interfaces/Themes.ts';
 
 import { HeaderNavigationComponent } from './HeaderNavigation.tsx';
@@ -18,6 +19,8 @@ interface HeaderProps {
 }
 function HeaderComponent({ onThemeChange, currentTheme }: HeaderProps) {
     const [activeTheme, setActiveTheme] = useState<ActiveTheme>(currentTheme);
+
+    const [isBurgerMenuOpen, handleToggleOpenBurgerMenu] = useToggle(false);
 
     const changeTheme = (theme: ActiveTheme) => {
         setActiveTheme(theme);
@@ -54,8 +57,10 @@ function HeaderComponent({ onThemeChange, currentTheme }: HeaderProps) {
                                 />
                             </svg>
                         </button>
-                        <button className={styles.header__mobilemenu}>
-                            <img className={styles.header__mobilemenu} src={mobilemenu} alt="Mobile Menu" />
+                        <button className={styles.header__mobilemenu} title="Mobile Menu" onClick={handleToggleOpenBurgerMenu}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 15H21M3 9H21" stroke="white" />
+                            </svg>
                         </button>
                         <button className={styles.header__login}>
                             <img className={styles.header__loginicon} src={loginicon} alt="Login" />
@@ -68,6 +73,7 @@ function HeaderComponent({ onThemeChange, currentTheme }: HeaderProps) {
                     </div>
                 </div>
             </header>
+            <BurgerMenu isOpen={isBurgerMenuOpen} handleIsOpen={handleToggleOpenBurgerMenu} />
         </>
     );
 }
